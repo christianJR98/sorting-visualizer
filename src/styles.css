@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.main-container{
+  display: flex;
+  width: 100%;
+  height: 500px;
+  background-color: burlywood;
+  align-items: center;
+  justify-content: center;
+}

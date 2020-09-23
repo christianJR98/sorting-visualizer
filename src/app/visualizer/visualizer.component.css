@@ -1,0 +1,24 @@
+
+.data-container{
+  width: 600px;
+  height: 500px;
+  background-color: antiquewhite;
+  display: flex;
+
+}
+
+.single-data{
+  width: 25px;
+  background-color: aquamarine;
+  border: 1px solid #000;
+  position: relative;
+  margin-top: auto;
+}
+
+.compare{
+  background-color: rebeccapurple;
+}
+
+.swap{
+  background-color: red;
+}
