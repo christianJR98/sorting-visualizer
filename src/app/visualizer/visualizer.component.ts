@@ -30,11 +30,11 @@ export class VisualizerComponent implements OnInit,OnChanges,DoCheck {
       this.bubbleSort();
       this.makeAnimation();
       this.endAlgorithm.emit();
-   }
+    }
   }
 
   ngDoCheck(){
-    console.log(this.speedAnimation);
+    console.log("var change");
     if(this.dataAmount !== this.lastDataAmount && this.dataAmount !== null){
 
       this.widthContainerData = document.getElementById('data-container').clientWidth;

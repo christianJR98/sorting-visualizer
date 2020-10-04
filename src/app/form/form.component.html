@@ -1,10 +1,10 @@
 <div class="form-container">
   <label for="">Amount of Data(5-{{maxData}})</label>
-  <input type="number" [(ngModel)] ="dataAmount">
+  <input type="number" [(ngModel)] ="dataAmount" (ngModelChange)="dataAmountFunc()">
 
   <label for="">Sorting Speed</label>
   <div class="range-form">
-    <span>-</span><input type="range" min="5" max="105"step="10" [(ngModel)]="speed"><span>+</span>
+    <span>-</span><input type="range" min="5" max="105"step="10" [(ngModel)]="speed" (ngModelChange)="speedChange()"><span>+</span>
   </div>
 
   <button (click)="startSortig($event)">Start</button>

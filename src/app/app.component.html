@@ -2,9 +2,14 @@
 
 <div class="main-container">
   <app-form
-  (startAlgorithm)="startAnimation($event)"
-  (dataAmountChange)="newDataAmount($event)"
-  (speedAnimation) = "speedAnimation($event)"></app-form>
+    (startAlgorithm)="startAnimation($event)"
+    (dataAmountChange)="newDataAmount($event)"
+    (speedAnimation) = "speedAnimation($event)"
+    [dataAmount]="dataAmount"
+    [speed]="speed"
+    ></app-form>
+
+
   <app-visualizer
   [startAlgorithm]="start"
   (endAlgorithm)="endAlgorithm()"

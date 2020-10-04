@@ -1,42 +1,33 @@
-import { Component, OnInit,DoCheck, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit,Input,Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
-export class FormComponent implements OnInit,DoCheck {
+export class FormComponent implements OnInit {
   @Output() startAlgorithm = new EventEmitter<MouseEvent>();
   @Output() dataAmountChange = new EventEmitter<number>();
   @Output() speedAnimation = new EventEmitter<number>();
-  speed:number;
-  oldSpeed:number;
-  dataAmount:number;
-  oldDataAmount:number;
+
+  @Input() dataAmount:number;
+  @Input() speed:number;
   maxData:number;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.dataAmount = 20;
-    this.oldDataAmount = 20;
-    this.maxData=100;
-    this.speed = 55;
+    this.maxData = 100;
   }
-  ngDoCheck(){
-    //Detects Other things than just changes on variables
-    if(this.dataAmount !== this.oldDataAmount){
-      if(this.dataAmount > this.maxData){
-        return;
-      }
-      this.oldDataAmount = this.dataAmount;
-      this.dataAmountChange.emit(this.dataAmount);
-    }
-    if(this.speed !== this.oldSpeed){
-      this.oldSpeed = this.speed;
-      this.speedAnimation.emit(this.speed);
-    }
 
+  // When data changes this function runs
+  dataAmountFunc(): void{
+    this.dataAmountChange.emit(this.dataAmount);
+  }
+
+  // When speed changes this function runs
+  speedChange(): void{
+    this.speedAnimation.emit(this.speed);
   }
 
   startSortig(mouseEvent:MouseEvent):void{
