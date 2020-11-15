@@ -1,52 +1,56 @@
-import { Component, OnInit,OnChanges,DoCheck,Input,SimpleChanges,Output,EventEmitter  } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { DataService } from '../data.service';
+import { GeneralInfo } from '../generalInfo.service'
+
 
 @Component({
   selector: 'app-visualizer',
   templateUrl: './visualizer.component.html',
   styleUrls: ['./visualizer.component.css']
 })
-export class VisualizerComponent implements OnInit,OnChanges,DoCheck {
-  @Input() dataAmount:number;
+export class VisualizerComponent implements OnInit {
+  /*@Input() dataAmount:number;
   @Input() speedAnimation:number;
   lastDataAmount:number;
   @Input() startAlgorithm:boolean;
   @Output() endAlgorithm = new EventEmitter();
-  data:number[] = [];
+  data:number[] = [];*/
+
   arrAnimation:{position1:number,position2:number}[];
+  speedAnimation:number;
+  data:number[] = [];
   widthContainerData:number;
   widthSingleData:number;
 
+  constructor(private dataService:DataService,private generalInfo:GeneralInfo) {
+    this.dataService.dataAmountChange.subscribe(
+      (dataAmount:number) => {
+        //Swap data
+        this.data = [];
+        this.fillData(dataAmount);
+      }
+    );
 
-  constructor(private dataService:DataService) { }
+    this.dataService.startAlgorithm.subscribe(
+      () => {
+        //start algorithm
+        this.bubbleSort();
+        this.makeAnimation();
+        this.dataService.setDataSorted(true)
+        //this.endAlgorithm.emit();
+      }
+    );
+
+
+  }
 
   ngOnInit(): void {
-    this.lastDataAmount = this.dataAmount;
     this.arrAnimation =[]
     this.widthContainerData = document.getElementById('data-container').clientWidth;
-    this.widthSingleData = Math.round(this.widthContainerData/this.dataAmount);
+    this.widthSingleData = Math.round(this.widthContainerData/this.dataService.getDataAmount());
     this.fillData();
   }
-  ngOnChanges(changes: SimpleChanges){
-    if (this.startAlgorithm === true) {
-      this.bubbleSort();
-      this.makeAnimation();
-      this.endAlgorithm.emit();
-    }
-  }
 
-  ngDoCheck(){
-    console.log("var change");
-    if(this.dataAmount !== this.lastDataAmount && this.dataAmount !== null){
-
-      this.widthContainerData = document.getElementById('data-container').clientWidth;
-      this.widthSingleData = Math.round(this.widthContainerData/this.dataAmount);
-
-      this.data = [];
-      this.fillData(this.dataAmount);
-      this.lastDataAmount = this.dataAmount;
-    }
-  }
   generateNumber(lowerBound:number,upperBound:number):number{
     return Math.floor((Math.random() * upperBound) + lowerBound);
   }
@@ -108,12 +112,12 @@ export class VisualizerComponent implements OnInit,OnChanges,DoCheck {
         document.getElementById('data-container').getElementsByClassName( 'single-data' )[position2].classList.add('swap');
         this.swapDivs(position1,position2,arrDivs)
         this.swapData(position1,position2,this.data);
-      },(el*3)*(this.speedAnimation)+100);
+      },(el*3)*(this.dataService.getSpeedAnimation())+100);
 
       setTimeout(()=>{
         document.getElementById('data-container').getElementsByClassName( 'single-data' )[position1].classList.remove('swap');
         document.getElementById('data-container').getElementsByClassName( 'single-data' )[position2].classList.remove('swap');
-      },(el*3)*(this.speedAnimation)+350);
+      },(el*3)*(this.dataService.getSpeedAnimation())+350);
 
       this.arrAnimation.shift();
       el++;

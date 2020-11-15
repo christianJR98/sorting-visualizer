@@ -7,38 +7,34 @@
 
   <!-- Step 2: Add the ngbCollapse directive to the element below. -->
   <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav w-100">
 
-      <form class="form-inline d-flex align-items-center">
-        <div class="form-group">
-          <label>Data Amount</label>
-          <input class="form-control" type="number">
-        </div>
+      <form class="form-inline w-100 justify-content-center">
 
-        <div class="form-group">
-          <select class="form-control" name="algorithms" id="algorithms" form="carform">
-            <option value="" selected>Select Algorithm ...</option>
-            <option value="B">Bubble Sort</option>
-            <option value="saab">Select Sort</option>
-            <option value="opel">Another</option>
-            <option value="audi">Audi</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Speed</label>
-          <span class="font-weight-bold purple-text mr-2 mt-1"><i class="fas fa-minus" aria-hidden="true"></i></span>
-
-          <input class="border-0" type="range" min="5" max="100" />
-
-          <span class="font-weight-bold purple-text ml-2 mt-1"><i class="fas fa-plus" aria-hidden="true"></i></span>
-        </div>
+        <label class="mr-2">Data Amount</label>
+        <input class="form-control mr-4" type="number" name="dataAmount" [(ngModel)]="dataAmount"
+          (ngModelChange)="dataAmountChange()">
 
 
+        <select class="form-control mr-4" name="algorithms" id="algorithms" form="carform"
+          (change)="algorithmChange($event)">
+          <option value="" selected>Select Algorithm ...</option>
 
-        <button class="btn btn-primary">Sort</button>
+          <option *ngFor="let algorithm of getAlgorithms()" value={{algorithm.value}}>
+            {{algorithm.name}}
+          </option>
+        </select>
+
+
+        <label class="mr-2">Speed</label>
+        <span class="font-weight-bold purple-text mr-2 mt-1"><i class="fas fa-minus" aria-hidden="true"></i></span>
+        <input class="border-0" type="range" min="5" max="100" (change)="speedChange($event)" />
+        <span class="font-weight-bold purple-text ml-2 mt-1 mr-4"><i class="fas fa-plus" aria-hidden="true"></i></span>
+
+
+        <button class="btn btn-primary px-4" (click)="startSortig()">Sort</button>
+
       </form>
-
 
     </ul>
   </div>

@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component,HostListener } from '@angular/core';
 import { DataService } from './data.service'
-
+import { GeneralInfo } from './generalInfo.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [ DataService ]
+  providers: [ DataService, GeneralInfo]
 })
 export class AppComponent {
 
@@ -15,11 +15,19 @@ export class AppComponent {
   speed:number;
   dataIsSorted:boolean = false;
 
+  constructor(private generalInfo:GeneralInfo){}
 
   ngOnInit(): void {
     this.dataAmount = 20;
     this.speed = 55;
+    this.generalInfo.setWidth(window.innerWidth)
   }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    console.log(window.innerWidth)
+  }
+
   startAnimation(event:MouseEvent){
     if(this.dataIsSorted == false){
       this.start = true;

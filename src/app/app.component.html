@@ -1,23 +1,6 @@
+<app-header></app-header>
+<div class="main-container">
 
-
-  <app-header></app-header>
-  <div class="main-container">
-    <app-form
-    (startAlgorithm)="startAnimation($event)"
-    (dataAmountChange)="newDataAmount($event)"
-    (speedAnimation) = "speedAnimation($event)"
-    [dataAmount]="dataAmount"
-    [speed]="speed"
-    ></app-form>
-
-
-    <app-visualizer
-      class="app-visualizer"
-      [startAlgorithm]="start"
-      (endAlgorithm)="endAlgorithm()"
-      [dataAmount]="dataAmount"
-      [speedAnimation]="speed">
-    </app-visualizer>
-  </div>
-
-
+  <app-visualizer class="app-visualizer">
+  </app-visualizer>
+</div>
