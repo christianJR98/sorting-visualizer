@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
+
 
 @Component({
   selector: 'app-header',
@@ -6,12 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  title:string;
-  constructor() {
+  isMenuCollapsed:boolean;
+  constructor(private dataService:DataService) {
   }
 
   ngOnInit(): void {
-    this.title = "Sorting Visualizer";
+    this.isMenuCollapsed = true
   }
 
 }

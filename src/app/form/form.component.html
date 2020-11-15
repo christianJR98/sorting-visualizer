@@ -1,11 +1,30 @@
 <div class="form-container">
-  <label for="">Amount of Data(5-{{maxData}})</label>
-  <input type="number" [(ngModel)] ="dataAmount" (ngModelChange)="dataAmountFunc()">
 
-  <label for="">Sorting Speed</label>
-  <div class="range-form">
-    <span>-</span><input type="range" min="5" max="105"step="10" [(ngModel)]="speed" (ngModelChange)="speedChange()"><span>+</span>
-  </div>
+    <div class="field-container form-group">
+      <label for="">Amount of Data(5-{{maxData}}) </label>
+      <input class="form-control" type="number" [(ngModel)] ="dataAmount" (ngModelChange)="dataAmountFunc()">
+    </div>
 
-  <button (click)="startSortig($event)">Start</button>
+    <div class="field-container form-group">
+      <label for="">Sorting Speed</label>
+      <div class="range-form">
+        <span>-</span><input class="form-control" type="range" min="5" max="105"step="10" [(ngModel)]="speed" (ngModelChange)="speedChange()"><span>+</span>
+      </div>
+    </div>
+
+    <div class="field-container form-group">
+      <label for="">Sorting Algorithm</label>
+
+      <input class="form-control" type="radio" name="algorithm" value="bubleSort">
+      <label for="">Buble Sort</label>
+
+      <input class="form-control" type="radio" name="algorithm" value="female">
+      <label for="">Select Sort</label>
+
+      <input class="form-control" type="radio" name="algorithm" value="other">
+      <label for="">Another</label>
+    </div>
+
+    <button (click)="startSortig($event)">Start</button>
+
 </div>

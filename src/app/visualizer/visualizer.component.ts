@@ -1,4 +1,6 @@
 import { Component, OnInit,OnChanges,DoCheck,Input,SimpleChanges,Output,EventEmitter  } from '@angular/core';
+import { DataService } from '../data.service';
+
 @Component({
   selector: 'app-visualizer',
   templateUrl: './visualizer.component.html',
@@ -16,7 +18,7 @@ export class VisualizerComponent implements OnInit,OnChanges,DoCheck {
   widthSingleData:number;
 
 
-  constructor() { }
+  constructor(private dataService:DataService) { }
 
   ngOnInit(): void {
     this.lastDataAmount = this.dataAmount;

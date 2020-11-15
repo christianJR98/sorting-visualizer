@@ -1,12 +1,18 @@
 .form-container{
+
+  height: 300px;
+  width: 225px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5%;
+}
+
+.field-container{
   display: flex;
   flex-direction: column;
-
+  margin-bottom: 8px;
 }
 
-.range-form{
-  display: flex;
-}
 .range-form span{
   font-size: 20px;
 }
