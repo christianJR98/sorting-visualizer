@@ -1,11 +1,8 @@
 
 .data-container{
-  width: 900px;
-  height: 100%; /*had 600px*/
-  /*background-color: antiquewhite;*/
-  margin-left: 20px;
-  display: flex;
-  align-self: flex-end;
+  width: 95%;
+  height: 100%;
+  margin: 0 auto;
 }
 
 .single-data{

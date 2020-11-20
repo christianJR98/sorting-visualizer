@@ -1,6 +1,6 @@
 <app-header></app-header>
-<div class="main-container">
-
-  <app-visualizer class="app-visualizer">
-  </app-visualizer>
+<div class="main-container" [ngStyle]="{
+  'height': 'calc(100vh - ' + getNavbarHeight()+'px)'
+}">
+  <app-visualizer></app-visualizer>
 </div>

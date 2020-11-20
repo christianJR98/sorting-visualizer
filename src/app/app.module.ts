@@ -5,7 +5,6 @@ import {FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { VisualizerComponent } from './visualizer/visualizer.component';
-import { FormComponent } from './form/form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -14,7 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     HeaderComponent,
     VisualizerComponent,
-    FormComponent
+
   ],
   imports: [
     BrowserModule,

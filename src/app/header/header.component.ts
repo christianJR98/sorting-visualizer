@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { GeneralInfo } from '../generalInfo.service';
 import { algorithms } from '../algorithmsConst'
 
 
@@ -13,7 +14,10 @@ export class HeaderComponent implements OnInit {
   dataAmount:number;
 
 
-  constructor(private dataService:DataService) {
+  constructor(
+    private dataService:DataService,
+    private generalInfo:GeneralInfo
+    ) {
 
   }
 
@@ -39,6 +43,11 @@ export class HeaderComponent implements OnInit {
 
   getAlgorithms(){
     return algorithms
+  }
+
+  getScreenSize(){
+    console.log(this.generalInfo.getScreenSize())
+    return this.generalInfo.getScreenSize()
   }
 
   validateForm(){

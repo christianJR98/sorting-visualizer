@@ -1,16 +1,9 @@
-.app-container{
-  width: 100%;
-}
-
 
 .main-container{
-  display: flex;
+  /*display: flex;*/
+  background: linear-gradient(to right, #004e92, #000428);
   width: 100%;
-  height: calc(100vh - 100px);
-  justify-content: center;
-  position: absolute;
-}
-
-.app-visualizer {
-  display: flex;
+  /*height: calc(100vh - 64px);*/
+ /*justify-content: center;
+  position: absolute;*/
 }

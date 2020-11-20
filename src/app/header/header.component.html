@@ -1,23 +1,20 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+<nav class="navbar navbar-expand-lg navbar-light bg-light pb-3 header" id='navbar'>
 
-  <!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
   <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
     &#9776;
   </button>
 
-  <!-- Step 2: Add the ngbCollapse directive to the element below. -->
   <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
     <ul class="navbar-nav w-100">
 
-      <form class="form-inline w-100 justify-content-center">
+      <form class="w-100 justify-content-center" [ngClass]="(getScreenSize()=='LARGE')?'form-inline':''">
 
-        <label class="mr-2">Data Amount</label>
+        <label class="mr-2 mb-1 mt-2">Data Amount</label>
         <input class="form-control mr-4" type="number" name="dataAmount" [(ngModel)]="dataAmount"
-          (ngModelChange)="dataAmountChange()">
-
+          (ngModelChange)="dataAmountChange()" [ngClass]="(getScreenSize()=='LARGE')?'':'mb-3'">
 
         <select class="form-control mr-4" name="algorithms" id="algorithms" form="carform"
-          (change)="algorithmChange($event)">
+          (change)="algorithmChange($event)" [ngClass]="(getScreenSize()=='LARGE')?'':'mb-3'">
           <option value="" selected>Select Algorithm ...</option>
 
           <option *ngFor="let algorithm of getAlgorithms()" value={{algorithm.value}}>
@@ -32,7 +29,9 @@
         <span class="font-weight-bold purple-text ml-2 mt-1 mr-4"><i class="fas fa-plus" aria-hidden="true"></i></span>
 
 
-        <button class="btn btn-primary px-4" (click)="startSortig()">Sort</button>
+        <button class="btn btn-primary px-4 mr-4" (click)="startSortig()">Sort</button>
+
+        <button class="btn btn-primary px-4">Shuffle</button>
 
       </form>
 

@@ -2,7 +2,6 @@ import { Component, OnInit} from '@angular/core';
 import { DataService } from '../data.service';
 import { GeneralInfo } from '../generalInfo.service'
 
-
 @Component({
   selector: 'app-visualizer',
   templateUrl: './visualizer.component.html',
@@ -22,7 +21,10 @@ export class VisualizerComponent implements OnInit {
   widthContainerData:number;
   widthSingleData:number;
 
-  constructor(private dataService:DataService,private generalInfo:GeneralInfo) {
+  constructor(
+    private dataService:DataService,
+    private generalInfo:GeneralInfo) {
+
     this.dataService.dataAmountChange.subscribe(
       (dataAmount:number) => {
         //Swap data
@@ -43,6 +45,7 @@ export class VisualizerComponent implements OnInit {
 
 
   }
+
 
   ngOnInit(): void {
     this.arrAnimation =[]

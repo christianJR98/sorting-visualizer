@@ -21,11 +21,22 @@ export class AppComponent {
     this.dataAmount = 20;
     this.speed = 55;
     this.generalInfo.setWidth(window.innerWidth)
+
+    this.generalInfo.setNavbarHeight(document.getElementById('navbar').scrollHeight)
+
+    /*
+    console.log("Height",document.getElementById('navbar').scrollHeight)
+    console.log("Height",document.getElementById('navbar').offsetHeight)
+    console.log("Height",document.getElementById('navbar').clientHeight)
+    console.log("Height",document.getElementById('navbar').getBoundingClientRect().height)
+    */
+
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    console.log(window.innerWidth)
+    this.generalInfo.setNavbarHeight(document.getElementById('navbar').scrollHeight)
+    this.generalInfo.setWidth(window.innerWidth)
   }
 
   startAnimation(event:MouseEvent){
@@ -46,5 +57,9 @@ export class AppComponent {
   newDataAmount(newAmount:number){
     this.dataIsSorted = false;
     this.dataAmount = newAmount;
+  }
+
+  getNavbarHeight(){
+    return this.generalInfo.getNavbarHeight()
   }
 }
