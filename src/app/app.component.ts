@@ -10,54 +10,24 @@ import { GeneralInfo } from './generalInfo.service';
 })
 export class AppComponent {
 
-  start:boolean = false;
-  dataAmount:number;
-  speed:number;
-  dataIsSorted:boolean = false;
+  constructor(private generalInfo:GeneralInfo,
+    private dataService:DataService){
 
-  constructor(private generalInfo:GeneralInfo){}
+  }
 
   ngOnInit(): void {
-    this.dataAmount = 20;
-    this.speed = 55;
+    //this.dataService.setDataAmount(30)
+    this.dataService.setSpeed(55)
     this.generalInfo.setWidth(window.innerWidth)
-
-    this.generalInfo.setNavbarHeight(document.getElementById('navbar').scrollHeight)
-
-    /*
-    console.log("Height",document.getElementById('navbar').scrollHeight)
-    console.log("Height",document.getElementById('navbar').offsetHeight)
-    console.log("Height",document.getElementById('navbar').clientHeight)
-    console.log("Height",document.getElementById('navbar').getBoundingClientRect().height)
-    */
-
+    this.generalInfo.setNavbarHeight(document.getElementById('navbar').offsetHeight)
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    this.generalInfo.setNavbarHeight(document.getElementById('navbar').scrollHeight)
+    this.generalInfo.setNavbarHeight(document.getElementById('navbar').clientHeight)
     this.generalInfo.setWidth(window.innerWidth)
   }
 
-  startAnimation(event:MouseEvent){
-    if(this.dataIsSorted == false){
-      this.start = true;
-    }else{
-      alert("Data Sorted");
-    }
-  }
-
-  endAlgorithm(){
-    this.dataIsSorted = true;
-    this.start = false;
-  }
-  speedAnimation(speed:number){
-    this.speed = speed;
-  }
-  newDataAmount(newAmount:number){
-    this.dataIsSorted = false;
-    this.dataAmount = newAmount;
-  }
 
   getNavbarHeight(){
     return this.generalInfo.getNavbarHeight()

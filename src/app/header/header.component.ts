@@ -12,6 +12,7 @@ import { algorithms } from '../algorithmsConst'
 export class HeaderComponent implements OnInit {
   isMenuCollapsed:boolean;
   dataAmount:number;
+  isDisabled:boolean;
 
 
   constructor(
@@ -19,11 +20,17 @@ export class HeaderComponent implements OnInit {
     private generalInfo:GeneralInfo
     ) {
 
+      this.dataService.endAlgorithm.subscribe(
+        () => {
+          this.isDisabled = !this.isDisabled
+        }
+      );
   }
 
   ngOnInit(): void {
     this.isMenuCollapsed = true
     this.dataAmount = this.dataService.getDataAmount()
+
   }
 
   algorithmChange(event): void{
@@ -38,7 +45,10 @@ export class HeaderComponent implements OnInit {
     this.dataService.setSpeed(event.target.value)
   }
   startSortig(): void{
-    this.dataService.setStart(true)
+    if(this.validateForm()){
+      this.dataService.setStart(true)
+      this.isDisabled = true
+    }
   }
 
   shuffle(){
@@ -50,15 +60,42 @@ export class HeaderComponent implements OnInit {
   }
 
   getScreenSize(){
-    console.log(this.generalInfo.getScreenSize())
     return this.generalInfo.getScreenSize()
   }
 
-  validateForm(){
-    if(this.dataAmount ){
+  disableForm(){
+    let form = document.getElementById("data-form");
+    let elements = form.getElementsByTagName('*');
+    for (var i = 0, len = elements.length; i < len; ++i) {
+      console.log(elements[i])
 
     }
-    //validar el algoritmo
+  }
+
+  validateForm(){
+
+    if(this.dataService.getIsDataSorted()){
+      alert('Data is sorted')
+      return false
+    }
+
+    if(this.dataAmount < this.dataService.minData || this.dataAmount > this.dataService.maxData ){
+      alert('Invalid data amount')
+      return false
+    }
+
+    const algo = algorithms.find(algorithm=>{
+      if(algorithm.value === this.dataService.getAlgorithm()){
+        return algorithm
+      }
+    })
+
+    if(!algo){
+      alert('Select an algorithm')
+      return false
+    }
+
+    return true
   }
 
 }

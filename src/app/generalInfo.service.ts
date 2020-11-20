@@ -1,4 +1,3 @@
-import { EventEmitter } from '@angular/core';
 
 export class GeneralInfo {
   width: number;
@@ -8,7 +7,6 @@ export class GeneralInfo {
 
   setWidth(newData:number) {
     this.width = newData
-    console.log(newData)
   }
 
   setHeight(newData:number) {
@@ -16,7 +14,12 @@ export class GeneralInfo {
   }
 
   setNavbarHeight(newData:number){
-    this.heightNavbar = newData;
+    if(newData > 120){
+      this.heightNavbar = 64
+    }
+    else {
+      this.heightNavbar = newData;
+    }
   }
 
   getNavbarHeight(){

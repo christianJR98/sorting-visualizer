@@ -8,12 +8,6 @@ import { GeneralInfo } from '../generalInfo.service'
   styleUrls: ['./visualizer.component.css']
 })
 export class VisualizerComponent implements OnInit {
-  /*@Input() dataAmount:number;
-  @Input() speedAnimation:number;
-  lastDataAmount:number;
-  @Input() startAlgorithm:boolean;
-  @Output() endAlgorithm = new EventEmitter();
-  data:number[] = [];*/
 
   arrAnimation:{position1:number,position2:number}[];
   speedAnimation:number;
@@ -27,7 +21,6 @@ export class VisualizerComponent implements OnInit {
 
     this.dataService.dataAmountChange.subscribe(
       (dataAmount:number) => {
-        //Swap data
         this.data = [];
         this.fillData(dataAmount);
       }
@@ -35,17 +28,15 @@ export class VisualizerComponent implements OnInit {
 
     this.dataService.startAlgorithm.subscribe(
       () => {
-        //start algorithm
         this.bubbleSort();
-        this.makeAnimation();
-        this.dataService.setDataSorted(true)
-        //this.endAlgorithm.emit();
+        let time = this.makeAnimation();
+        //this.dataService.setDataSorted(true);
       }
     );
 
     this.dataService.shuffleData.subscribe(
       ()=>{
-        this.shuffle(this.data)
+        this.shuffle(this.data);
       }
     )
 
@@ -57,7 +48,7 @@ export class VisualizerComponent implements OnInit {
     this.arrAnimation =[]
     this.widthContainerData = document.getElementById('data-container').clientWidth;
     this.widthSingleData = Math.round(this.widthContainerData/this.dataService.getDataAmount());
-    this.fillData();
+    this.fillData(this.dataService.getDataAmount());
   }
 
   generateNumber(lowerBound:number,upperBound:number):number{
@@ -112,6 +103,7 @@ export class VisualizerComponent implements OnInit {
     }
   }
   makeAnimation(){
+    let accumulator = 30
     let arrDivs:NodeList = document.getElementById('data-container').childNodes;
     let el = 0;
     while(this.arrAnimation.length!=0){
@@ -128,10 +120,18 @@ export class VisualizerComponent implements OnInit {
         document.getElementById('data-container').getElementsByClassName( 'single-data' )[position2].classList.remove('swap');
       },(el*3)*(this.dataService.getSpeedAnimation())+350);
 
+      if(this.arrAnimation.length===1){
+        setTimeout(()=>{
+          this.dataService.setDataSorted(true);
+        },(el*3)*(this.dataService.getSpeedAnimation()));
+      }
+
       this.arrAnimation.shift();
       el++;
+
     }
 
+    return accumulator
   }
 
 }

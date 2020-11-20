@@ -11,6 +11,7 @@ export class DataService {
   minData:number = 4;
 
   startAlgorithm = new EventEmitter();
+  endAlgorithm = new EventEmitter();
   dataAmountChange = new EventEmitter<number>();
   speedAnimation = new EventEmitter<number>();
   dataIsSorted = new EventEmitter<boolean>();
@@ -21,7 +22,7 @@ export class DataService {
       return
     }
     this.dataAmount = dataAmount
-    console.log('New dataAmount:' + dataAmount)
+    //console.log('New dataAmount:' + dataAmount)
     this.dataAmountChange.emit(this.dataAmount)
 
     this.dataSorted = false
@@ -29,30 +30,42 @@ export class DataService {
   }
   setSpeed(speed:number){
     this.speed = speed
-    console.log('New Speed:' + speed)
+    //console.log('New Speed:' + speed)
   }
   setDataSorted(dataSorted:boolean){
     this.dataSorted = dataSorted
     this.dataIsSorted.emit(this.dataSorted)
-    console.log('Data Sorted:' + dataSorted)
+    setTimeout(()=>{
+      this.endAlgorithm.emit()
+    },1000)
+
+    //console.log('Data Sorted:' + dataSorted)
   }
   setAlgorithm(algorithm:string){
     this.algorithm = algorithm
-    console.log('New Algo:' + algorithm)
+    //console.log('New Algo:' + algorithm)
   }
   setStart(value:boolean) {
     this.start = value
     this.startAlgorithm.emit()
-    console.log('start sorting')
+    //console.log('start sorting')
   }
+
   shuffle(){
+    this.dataSorted = false
     this.shuffleData.emit()
   }
 
   getDataAmount(){
     return this.dataAmount
   }
+  getAlgorithm(){
+    return this.algorithm
+  }
   getSpeedAnimation(){
     return this.speed
+  }
+  getIsDataSorted(){
+    return this.dataSorted
   }
 }
