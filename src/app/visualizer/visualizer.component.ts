@@ -43,6 +43,12 @@ export class VisualizerComponent implements OnInit {
       }
     );
 
+    this.dataService.shuffleData.subscribe(
+      ()=>{
+        this.shuffle(this.data)
+      }
+    )
+
 
   }
 
@@ -57,7 +63,7 @@ export class VisualizerComponent implements OnInit {
   generateNumber(lowerBound:number,upperBound:number):number{
     return Math.floor((Math.random() * upperBound) + lowerBound);
   }
-  suffle(sortedArray:number[]){
+  shuffle(sortedArray:number[]){
     let aux:number[] = [...sortedArray];
     let generalIndex = 0;
     while(aux.length != 0){
@@ -75,7 +81,7 @@ export class VisualizerComponent implements OnInit {
     for(let i = inicio; i < cantData+inicio;i++){
       this.data.push(i+1);
     }
-    this.suffle(this.data);
+    this.shuffle(this.data);
   }
   //indices de 0 a N-1
   swapDivs(indx1:number,indx2:number,arr:NodeList){

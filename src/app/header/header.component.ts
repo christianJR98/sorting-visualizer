@@ -41,6 +41,10 @@ export class HeaderComponent implements OnInit {
     this.dataService.setStart(true)
   }
 
+  shuffle(){
+    this.dataService.shuffle()
+  }
+
   getAlgorithms(){
     return algorithms
   }

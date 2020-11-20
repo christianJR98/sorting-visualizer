@@ -14,6 +14,7 @@ export class DataService {
   dataAmountChange = new EventEmitter<number>();
   speedAnimation = new EventEmitter<number>();
   dataIsSorted = new EventEmitter<boolean>();
+  shuffleData = new EventEmitter();
 
   setDataAmount(dataAmount:number){
     if(dataAmount > this.maxData || dataAmount < this.minData){
@@ -43,6 +44,9 @@ export class DataService {
     this.start = value
     this.startAlgorithm.emit()
     console.log('start sorting')
+  }
+  shuffle(){
+    this.shuffleData.emit()
   }
 
   getDataAmount(){
