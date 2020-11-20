@@ -105,17 +105,6 @@ export class VisualizerComponent implements OnInit {
     arr[indx1] = aux;
   }
 
-  bubbleSort(){
-    let auxArr = [...this.data];
-    for(let i =0; i < auxArr.length;i++){
-      for(let j = i+1; j < auxArr.length;j++){
-        if(auxArr[i] > auxArr[j]){
-          this.arrAnimation.push({position1:i,position2:j});
-          this.swapData(i,j,auxArr);
-        }
-      }
-    }
-  }
   makeAnimation(){
     let accumulator = 30
     let arrDivs:NodeList = document.getElementById('data-container').childNodes;
