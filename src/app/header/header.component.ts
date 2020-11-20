@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { GeneralInfo } from '../generalInfo.service';
-import { algorithms } from '../algorithmsConst'
+import { algorithms } from '../Algorithms/algorithmsConst'
 
 
 @Component({
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
 
 
   constructor(
-    private dataService:DataService,
+    public dataService:DataService,
     private generalInfo:GeneralInfo
     ) {
 
@@ -80,7 +80,7 @@ export class HeaderComponent implements OnInit {
     }
 
     if(this.dataAmount < this.dataService.minData || this.dataAmount > this.dataService.maxData ){
-      alert('Invalid data amount')
+      alert(`Invalid data amount, should be between ${this.dataService.minData} and ${this.dataService.maxData}`)
       return false
     }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { DataService } from '../data.service';
 import { GeneralInfo } from '../generalInfo.service'
+import { bubbleSort,quickSort, selectionSort} from '../Algorithms/algorithms'
+import { BUBBLE_SORT, QUICK_SORT, SELECTION_SORT } from '../Algorithms/algorithmsConst';
 
 @Component({
   selector: 'app-visualizer',
@@ -28,9 +30,21 @@ export class VisualizerComponent implements OnInit {
 
     this.dataService.startAlgorithm.subscribe(
       () => {
-        this.bubbleSort();
-        let time = this.makeAnimation();
-        //this.dataService.setDataSorted(true);
+
+        switch(this.dataService.getAlgorithm()){
+          case BUBBLE_SORT:
+            bubbleSort(this.data, this.arrAnimation);
+            break;
+          case QUICK_SORT:
+            quickSort(this.data, this.arrAnimation);
+            break;
+          case SELECTION_SORT:
+            selectionSort(this.data, this.arrAnimation);
+            break;
+
+        }
+
+        this.makeAnimation();
       }
     );
 
@@ -123,7 +137,8 @@ export class VisualizerComponent implements OnInit {
       if(this.arrAnimation.length===1){
         setTimeout(()=>{
           this.dataService.setDataSorted(true);
-        },(el*3)*(this.dataService.getSpeedAnimation()));
+          alert('Data sorted')
+        },(el*3)*(this.dataService.getSpeedAnimation())+500);
       }
 
       this.arrAnimation.shift();

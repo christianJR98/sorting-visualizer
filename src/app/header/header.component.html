@@ -9,7 +9,7 @@
 
       <form id="data-form" class="w-100 justify-content-center" [ngClass]="(getScreenSize()=='LARGE')?'form-inline':''">
 
-        <label class="mr-2 mb-1 mt-2">Data Amount</label>
+        <label class="mr-2 mb-1 mt-2">Data Amount({{this.dataService.minData}} - {{this.dataService.maxData}})</label>
         <input class="form-control mr-4" type="number" name="dataAmount" [(ngModel)]="dataAmount"
           (ngModelChange)="dataAmountChange()" [ngClass]="(getScreenSize()=='LARGE')?'':'mb-3'" [disabled]="isDisabled">
 
